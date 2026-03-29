@@ -1,7 +1,8 @@
-name: Auto PR
+name: Issue to PR
 
 on:
-  workflow_dispatch
+  issues:
+    types: [opened]
 
 jobs:
   create-pr:
@@ -10,30 +11,41 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Make change
+      # ▼ Issueの内容を取得
+      - name: Read Issue
         run: |
-          echo "update $(date)" >> log.txt
+          echo "TITLE=${{ github.event.issue.title }}" >> $GITHUB_ENV
+          echo "BODY=${{ github.event.issue.body }}" >> $GITHUB_ENV
 
+      # ▼ （ここがCodexに置き換わる部分）
+      - name: Generate LP (dummy)
+        run: |
+          echo "<html><body><h1>${TITLE}</h1><p>${BODY}</p></body></html>" > index.html
+
+      # ▼ Git設定
       - name: Setup Git
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
 
+      # ▼ ブランチ作成
       - name: Create branch
         run: |
-          BRANCH=auto-update-$(date +%s)
+          BRANCH=auto-lp-${{ github.event.issue.number }}
           echo "BRANCH=$BRANCH" >> $GITHUB_ENV
           git checkout -b $BRANCH
 
+      # ▼ commit & push
       - name: Commit & Push
         run: |
           git add .
-          git commit -m "auto update"
+          git commit -m "Generate LP from issue #${{ github.event.issue.number }}"
           git push origin $BRANCH
 
+      # ▼ PR作成（本体）
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
           branch: ${{ env.BRANCH }}
-          title: "Auto PR"
-          body: "Auto generated PR"
+          title: "Auto LP from issue #${{ github.event.issue.number }}"
+          body: "Generated from issue"
