@@ -3,77 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Accenture PRページ</title>
+  <title>ドイツの素晴らしさ</title>
   <style>
+    :root {
+      --black: #111;
+      --red: #d81e05;
+      --gold: #ffce00;
+      --bg: #f6f7fb;
+      --text: #1f2937;
+    }
+
     body {
       margin: 0;
-      font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-      background: linear-gradient(135deg, #230046, #5a1aa8);
-      color: #fff;
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+      background: linear-gradient(160deg, var(--bg), #ffffff);
+      color: var(--text);
       min-height: 100vh;
       display: grid;
       place-items: center;
+      padding: 24px;
     }
 
     .card {
-      width: min(680px, 90vw);
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 16px;
-      padding: 32px;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-      text-align: center;
+      width: min(760px, 100%);
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+    }
+
+    .flag {
+      height: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .flag div:nth-child(1) { background: var(--black); }
+    .flag div:nth-child(2) { background: var(--red); }
+    .flag div:nth-child(3) { background: var(--gold); }
+
+    .content {
+      padding: 28px;
     }
 
     h1 {
-      margin-top: 0;
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      letter-spacing: 0.02em;
+      margin: 0 0 10px;
+      font-size: clamp(1.7rem, 4vw, 2.3rem);
     }
 
     p {
+      margin: 8px 0;
       line-height: 1.8;
-      margin: 10px 0;
     }
 
-    .cta {
-      margin-top: 20px;
-      display: inline-block;
-      padding: 12px 20px;
-      border-radius: 999px;
-      text-decoration: none;
-      color: #230046;
-      background: #fff;
-      font-weight: 700;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    ul {
+      margin: 14px 0 0;
+      padding-left: 20px;
+      line-height: 1.9;
     }
 
-    .cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+    li::marker {
+      color: var(--red);
     }
 
-    small {
-      display: block;
-      margin-top: 16px;
-      opacity: 0.75;
+    .note {
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: #6b7280;
     }
   </style>
 </head>
 <body>
   <main class="card">
-    <h1>未来を、もっと速く。</h1>
-    <p><strong>Accenture</strong> は、戦略・テクノロジー・クリエイティブを掛け合わせ、
-      企業の変革を加速させるグローバルパートナーです。</p>
-    <p>デジタル、クラウド、AIの力で、
-      「いま必要な成果」と「これからの成長」を同時に実現します。</p>
-
-    <a class="cta" href="https://www.accenture.com/jp-ja" target="_blank" rel="noopener noreferrer">
-      公式サイトを見る
-    </a>
-
-    <small>※ 本ページはデモとして作成したシンプルなPRページです。</small>
+    <div class="flag" aria-hidden="true">
+      <div></div><div></div><div></div>
+    </div>
+    <section class="content">
+      <h1>ドイツの素晴らしさ 🇩🇪</h1>
+      <p>ドイツは、歴史・技術・自然・文化が高いレベルで調和した魅力的な国です。</p>
+      <ul>
+        <li><strong>高い技術力：</strong>自動車や機械工学など、世界をリードするものづくり。</li>
+        <li><strong>美しい街並み：</strong>ベルリン、ミュンヘン、ハイデルベルクなど個性豊かな都市。</li>
+        <li><strong>豊かな自然：</strong>黒い森やアルプス周辺など、四季を感じる絶景スポット。</li>
+        <li><strong>食文化：</strong>ソーセージ、プレッツェル、ビールなど地域ごとの味わいが豊富。</li>
+        <li><strong>学術と芸術：</strong>哲学・音楽・科学で世界に大きな影響を与えてきた伝統。</li>
+      </ul>
+      <p class="note">シンプルに「ドイツの良さ」を紹介するためのサンプルHTMLページです。</p>
+    </section>
   </main>
 </body>
 </html>
