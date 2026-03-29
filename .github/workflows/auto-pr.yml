@@ -1,0 +1,39 @@
+name: Auto PR
+
+on:
+  workflow_dispatch
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Make change
+        run: |
+          echo "update $(date)" >> log.txt
+
+      - name: Setup Git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
+      - name: Create branch
+        run: |
+          BRANCH=auto-update-$(date +%s)
+          echo "BRANCH=$BRANCH" >> $GITHUB_ENV
+          git checkout -b $BRANCH
+
+      - name: Commit & Push
+        run: |
+          git add .
+          git commit -m "auto update"
+          git push origin $BRANCH
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: ${{ env.BRANCH }}
+          title: "Auto PR"
+          body: "Auto generated PR"
